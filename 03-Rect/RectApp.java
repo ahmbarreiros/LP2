@@ -1,6 +1,7 @@
 public class RectApp {
     public static void main (String[] args) {
         Rect r1 = new Rect(1,1, 10,10);
+	r1.drag(5, 5);
         r1.print();
     }
 }
