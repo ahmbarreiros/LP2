@@ -26,17 +26,17 @@ class PackFrame extends JFrame {
         );
         this.setTitle("Java Packages");
         this.setSize(350, 350);
-        this.r1 = new Rect(50,50, 100,30);
-        this.e1 = new Ellipse(50,100, 100,30);
-	this.a1 = new Arc(50, 150, 150, 150, 0, 180, 0);
-	this.a2 = new Arc(200, 275, 50, 50, 90, 180, 0);
+        this.r1 = new Rect(50,50, 100,30, 0, 0, 255, 255, 0, 0);
+        this.e1 = new Ellipse(50,100, 100,30, 0, 0, 255, 0, 255, 0);
+	    this.a1 = new Arc(50, 150, 150, 150, 0, 180, 0, 0, 0, 255);
+	    this.a2 = new Arc(200, 275, 50, 50, 90, 180, 0, 0, 0, 0);
     }
 
     public void paint (Graphics g) {
         super.paint(g);
         this.r1.paint(g);
         this.e1.paint(g);
-	this.a1.paint(g);
-	this.a2.paint(g);
+	    this.a1.paint(g);
+	    this.a2.paint(g);
     }
 }
