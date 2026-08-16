@@ -24,8 +24,6 @@ class ListFrame extends JFrame {
     private int mousePosX = 0;
     private int mousePosY = 0;
 
-    private boolean isMousePressed = false;
-
     ListFrame () {
         this.addWindowListener (
             new WindowAdapter() {
