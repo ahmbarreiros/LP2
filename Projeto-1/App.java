@@ -17,6 +17,7 @@ class App {
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     private Figure focus = null;
+    private boolean isBeingErased = false;
 
 
     private int mousePosXPressed = 0;
@@ -86,6 +87,12 @@ class ListFrame extends JFrame {
                         figs.add(new Arc(mousePosX, mousePosY, 50, 50));
                         repaint();  // outer.repaint()
                     }
+                    if (evt.getKeyChar() == 'p') {
+                        if (focus != null) {
+				isBeingErased = true;
+                        	repaint();  // outer.repaint()
+			}
+                    }
                 }
             }
         );
@@ -102,6 +109,11 @@ class ListFrame extends JFrame {
             g2d.setColor(new Color(255,0,0));
             g2d.drawRect(focus.x-3, focus.y-3, focus.w+6, focus.h+6);
             g2d.setColor(new Color(0,0,0));
+
+	    if (isBeingErased) {
+	    	g2d.clearRect(focus.x, focus.y, focus.w, focus.h);
+		isBeingErased = false;
+	    }
         }
 
         for (Figure fig: this.figs) {
