@@ -18,5 +18,10 @@ public abstract class Figure {
         this.y += dy;
     }
 
+    public void transform(int dw, int dh) {
+	this.w += dw;
+	this.h += dh;
+    }
+
     public abstract void paint (Graphics g);
 }

@@ -54,8 +54,17 @@ class ListFrame extends JFrame {
                 public void mouseDragged(MouseEvent evt) {
                     mousePosX = evt.getX();
                     mousePosY = evt.getY();
+
                     if (focus != null) {
-                        focus.drag(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
+			if ((evt.getX() >= focus.x-3 && evt.getX() <= focus.x+6 && evt.getY() >= focus.y-3 && evt.getY() <= focus.y+6) ||
+			    (evt.getX() == focus.x-3 && evt.getY() == focus.y+6) ||
+			    (evt.getX() == focus.x+6 && evt.getY() == focus.y-3) ||
+			    (evt.getX() == focus.x+6 && evt.getY() == focus.y+6)) {
+			    	focus.transform(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
+			    }
+			else {
+ 				focus.drag(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
+			}
                         mousePosXPressed = mousePosX;
                         mousePosYPressed = mousePosY;
                         repaint();
@@ -87,7 +96,7 @@ class ListFrame extends JFrame {
                         figs.add(new Arc(mousePosX, mousePosY, 50, 50));
                         repaint();  // outer.repaint()
                     }
-                    if (evt.getKeyChar() == 'p') {
+                    if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
                         if (focus != null) {
 				isBeingErased = true;
                         	repaint();  // outer.repaint()
@@ -113,6 +122,9 @@ class ListFrame extends JFrame {
 	    if (isBeingErased) {
 	    	g2d.clearRect(focus.x, focus.y, focus.w, focus.h);
 		isBeingErased = false;
+		figs.remove(focus);
+		focus = null;
+		repaint();
 	    }
         }
 
