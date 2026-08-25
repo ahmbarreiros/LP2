@@ -18,9 +18,29 @@ public abstract class Figure {
         this.y += dy;
     }
 
-    public void transform(int dw, int dh) {
-	this.w += dw;
-	this.h += dh;
+    public void transformNW(int dw, int dh) {
+	this.w += (-1*dw);
+	this.h += (-1*dh);
+	this.x += dw;
+	this.y += dh;
+    }  
+    public void transformNE(int dw, int dh) {
+	this.w += (dw);
+	this.h += (-1*dh);
+	//this.x += dw;
+	this.y += dh;
+    }
+    public void transformSW(int dw, int dh) {
+	this.w += (-1*dw);
+	this.h += (dh);
+	this.x += dw;
+	//this.y += dh;
+    }
+    public void transformSE(int dw, int dh) {
+	this.w += (dw);
+	this.h += (dh);
+	//this.x += dw;
+	//this.y += dh;
     }
 
     public abstract void paint (Graphics g);
