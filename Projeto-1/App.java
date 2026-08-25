@@ -17,8 +17,6 @@ class App {
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     private Figure focus = null;
-    private boolean isBeingErased = false;
-
 
     private int mousePosXPressed = 0;
     private int mousePosYPressed = 0;
@@ -37,15 +35,19 @@ class ListFrame extends JFrame {
         this.addMouseListener(
             new MouseAdapter() {
                 public void mousePressed(MouseEvent evt) {
-                    focus = null;
+		    if(focus != null && ((focus.x <= evt.getX() && (focus.x + focus.w) >= evt.getX()) && (focus.y <= evt.getY() && (focus.y + focus.h) >= evt.getY()))) {
+			   return;
+		    }
+		    focus = null;
                     for (Figure fig: figs) {
+
                         if ((fig.x <= evt.getX() && (fig.x + fig.w) >= evt.getX()) && (fig.y <= evt.getY() && (fig.y + fig.h) >= evt.getY())) {
-                            focus = fig;
+			    focus = fig;
                             mousePosXPressed = evt.getX();
                             mousePosYPressed = evt.getY();
-                            repaint();
                         }
                     }
+		    repaint();
                 }
             }
         );
@@ -57,9 +59,9 @@ class ListFrame extends JFrame {
 
                     if (focus != null) {
 			if ((evt.getX() >= focus.x-3 && evt.getX() <= focus.x+6 && evt.getY() >= focus.y-3 && evt.getY() <= focus.y+6) ||
-			    (evt.getX() == focus.x-3 && evt.getY() == focus.y+6) ||
-			    (evt.getX() == focus.x+6 && evt.getY() == focus.y-3) ||
-			    (evt.getX() == focus.x+6 && evt.getY() == focus.y+6)) {
+			    (evt.getX() >= (focus.x+focus.w)-3 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= focus.y-3 && evt.getY() <= focus.y+6)||
+			    (evt.getX() >= focus.x-3 && evt.getX() <= focus.x+6 && evt.getY() >= (focus.y+focus.h)-3 && evt.getY() <= (focus.y+focus.h)+6)||
+			    (evt.getX() >= (focus.x+focus.w)-3 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= (focus.y+focus.h)-3 && evt.getY() <= (focus.y+focus.h)+6)){
 			    	focus.transform(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
 			    }
 			else {
@@ -85,21 +87,22 @@ class ListFrame extends JFrame {
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
                     if (evt.getKeyChar() == 'r') {
-                        figs.add(new Rect(mousePosX, mousePosY, 50, 50));
+                        figs.add(new Rect(mousePosX-25, mousePosY-25, 50, 50));
                         repaint();  // outer.repaint()
                     }
                     if (evt.getKeyChar() == 'e') {
-                        figs.add(new Ellipse(mousePosX, mousePosY, 80, 50));
+                        figs.add(new Ellipse(mousePosX-40, mousePosY-25, 80, 50));
                         repaint();  // outer.repaint()
                     }
                     if (evt.getKeyChar() == 'a') {
-                        figs.add(new Arc(mousePosX, mousePosY, 50, 50));
+                        figs.add(new Arc(mousePosX-25, mousePosY-25, 50, 50));
                         repaint();  // outer.repaint()
                     }
                     if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
                         if (focus != null) {
-				isBeingErased = true;
-                        	repaint();  // outer.repaint()
+				figs.remove(focus);
+				focus = null;
+                        	repaint();
 			}
                     }
                 }
@@ -118,15 +121,7 @@ class ListFrame extends JFrame {
             g2d.setColor(new Color(255,0,0));
             g2d.drawRect(focus.x-3, focus.y-3, focus.w+6, focus.h+6);
             g2d.setColor(new Color(0,0,0));
-
-	    if (isBeingErased) {
-	    	g2d.clearRect(focus.x, focus.y, focus.w, focus.h);
-		isBeingErased = false;
-		figs.remove(focus);
-		focus = null;
-		repaint();
 	    }
-        }
 
         for (Figure fig: this.figs) {
             fig.paint(g);
