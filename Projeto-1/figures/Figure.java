@@ -19,28 +19,86 @@ public abstract class Figure {
     }
 
     public void transformNW(int dw, int dh) {
-	this.w += (-1*dw);
-	this.h += (-1*dh);
-	this.x += dw;
-	this.y += dh;
-    }  
+        if(this.w + (-1*dw) <= 30) {
+            this.w = 30;
+        } else {
+            this.w += (-1*dw);
+            this.x += dw;
+        }
+        if(this.h + (-1*dh) <= 30) {
+            this.h = 30;
+        } else {
+            this.h += (-1*dh);
+            this.y += dh;
+        }
+    }
     public void transformNE(int dw, int dh) {
-	this.w += (dw);
-	this.h += (-1*dh);
-	//this.x += dw;
-	this.y += dh;
+        if(this.w + dw <= 30) {
+            this.w = 30;
+        } else {
+            this.w += (dw);
+        }
+        if(this.h + (-1*dh) <= 30) {
+            this.h = 30;
+        } else {
+            this.h += (-1*dh);
+            this.y += dh;
+        }
     }
     public void transformSW(int dw, int dh) {
-	this.w += (-1*dw);
-	this.h += (dh);
-	this.x += dw;
-	//this.y += dh;
+        if(this.w + (-1*dw) <= 30) {
+            this.w = 30;
+        } else {
+            this.w += (-1*dw);
+            this.x += dw;
+        }
+        if(this.h + dh <= 30) {
+            this.h = 30;
+        } else {
+            this.h += (dh);
+        }
     }
     public void transformSE(int dw, int dh) {
-	this.w += (dw);
-	this.h += (dh);
-	//this.x += dw;
-	//this.y += dh;
+        if(this.w + dw <= 30) {
+            this.w = 30;
+        } else {
+            this.w += (dw);
+        }
+        if(this.h + dh <= 30) {
+            this.h = 30;
+        } else {
+            this.h += (dh);
+        }
+    }
+    public void transformN(int dh) {
+        if(this.h + (-1*dh) <= 30) {
+            this.h = 30;
+        } else {
+            this.h += (-1*dh);
+            this.y += dh;
+        }
+    }
+    public void transformS(int dh) {
+        if(this.h + dh <= 30) {
+            this.h = 30;
+        } else {
+            this.h += (dh);
+        }
+    }
+    public void transformW(int dw) {
+        if(this.w + (-1*dw) <= 30) {
+            this.w = 30;
+        } else {
+            this.w += (-1*dw);
+            this.x += dw;
+        }
+    }
+    public void transformE(int dw) {
+        if(this.w + dw <= 30) {
+            this.w = 30;
+        } else {
+            this.w += (dw);
+        }
     }
 
     public abstract void paint (Graphics g);

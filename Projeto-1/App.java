@@ -17,6 +17,7 @@ class App {
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     private Figure focus = null;
+    private String drag = "";
 
     private int mousePosXPressed = 0;
     private int mousePosYPressed = 0;
@@ -33,74 +34,146 @@ class ListFrame extends JFrame {
         );
 
         this.addMouseListener(
-            new MouseAdapter() {
-                public void mousePressed(MouseEvent evt) {
-		    mousePosXPressed = evt.getX();
-		    mousePosYPressed = evt.getY();
-		    if(focus != null && ((focus.x <= evt.getX() && (focus.x + focus.w) >= evt.getX()) && (focus.y <= evt.getY() && (focus.y + focus.h) >= evt.getY()))) {
-			   return;
-		    }
-		    focus = null;
-                    for (Figure fig: figs) {
-
-                        if ((fig.x <= evt.getX() && (fig.x + fig.w) >= evt.getX()) && (fig.y <= evt.getY() && (fig.y + fig.h) >= evt.getY())) {
-			    focus = fig;
-                        }
-                    }
-		    repaint();
-                }
-            }
-        );
+                              new MouseAdapter() {
+                                  public void mousePressed(MouseEvent evt) {
+                                      mousePosXPressed = evt.getX();
+                                      mousePosYPressed = evt.getY();
+                                      drag = "";
+                                      if(focus != null && ((focus.x-6 <= evt.getX() && (focus.x + focus.w + 6) >= evt.getX()) && (focus.y-6 <= evt.getY() && (focus.y + focus.h + 6) >= evt.getY()))) {
+                                          if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6) {
+                                              drag = "NW";
+                                          } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6){
+                                              drag = "NE";
+                                          } else if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                                              drag = "SW";
+                                          } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                                              drag = "SE";
+                                          } else if(evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6){
+                                              drag = "N";
+                                          } else if(evt.getY() >= (focus.y+focus.h-6) && evt.getY() <= (focus.y+focus.h+6)){
+                                              drag = "S";
+                                          } else if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6){
+                                              drag = "W";
+                                          } else if(evt.getX() >= (focus.x+focus.w-6) && evt.getX() <= (focus.x+focus.w+6)){
+                                              drag = "E";
+                                          } else if(evt.getX() >= focus.x+7 && evt.getX() <= (focus.x + focus.w - 7) && evt.getY() >= focus.y+7 && evt.getY() <= (focus.y + focus.h - 7)){
+                                              drag = "D";
+                                          }
+                                          return;
+                                      }
+                                      focus = null;
+                                      for (Figure fig: figs) {
+                                          if ((fig.x <= evt.getX() && (fig.x + fig.w) >= evt.getX()) && (fig.y <= evt.getY() && (fig.y + fig.h) >= evt.getY())) {
+                                              focus = fig;
+                                          }
+                                      }
+                                      repaint();
+                                  }
+                                  public void mouseReleased(MouseEvent evt) {
+                                      if (focus != null && drag != "") {
+                                          switch(drag) {
+                                          case "NW":
+                                              setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
+                                              break;
+                                          case "NE":
+                                              setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
+                                              break;
+                                          case "SW":
+                                              setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
+                                              break;
+                                          case "SE":
+                                              setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
+                                              break;
+                                          case "N":
+                                              setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
+                                              break;
+                                          case "S":
+                                              setCursor(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
+                                              break;
+                                          case "W":
+                                              setCursor(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
+                                              break;
+                                          case "E":
+                                              setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
+                                              break;
+                                          default:
+                                              setCursor(Cursor.getDefaultCursor());
+                                              break;
+                                          }
+                                          repaint();
+                                      }
+                                  }
+                              }
+                              );
 
         this.addMouseMotionListener(new MouseMotionAdapter() {
                 public void mouseDragged(MouseEvent evt) {
                     mousePosX = evt.getX();
                     mousePosY = evt.getY();
-                    if (focus != null) {
-			if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+12 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+12) {
-				focus.transformNW(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-			}
-			if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+12 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+12){
-				focus.transformNE(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-			}
-			if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+12 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+12){
-					focus.transformSW(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-			}
-			if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+12 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+12){
-				focus.transformSE(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-			}
-			}
-			else {
-				setCursor(Cursor.getDefaultCursor());
- 				//focus.drag(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-			}
-			mousePosXPressed = mousePosX;
-			mousePosYPressed = mousePosY;
-			repaint();
+                    if (focus != null && drag != "") {
+                        switch(drag) {
+                        case "NW":
+                            focus.transformNW(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
+                            break;
+                        case "NE":
+                            focus.transformNE(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
+                            break;
+                        case "SW":
+                            focus.transformSW(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
+                            break;
+                        case "SE":
+                            focus.transformSE(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
+                            break;
+                        case "N":
+                            focus.transformN(mousePosY - mousePosYPressed);
+                            break;
+                        case "S":
+                            focus.transformS(mousePosY - mousePosYPressed);
+                            break;
+                        case "W":
+                            focus.transformW(mousePosX - mousePosXPressed);
+                            break;
+                        case "E":
+                            focus.transformE(mousePosX - mousePosXPressed);
+                            break;
+                        case "D":
+                            focus.drag(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
+                            break;
+                        default:
+                            break;
+                        }
                     }
+                    mousePosXPressed = mousePosX;
+                    mousePosYPressed = mousePosY;
+                    repaint();
+                }
 
                 
 
                 public void mouseMoved(MouseEvent evt) {
-			if (focus != null) {
-				if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+12 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+12) {
-					setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
-				}
-				else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+12 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+12){
-					setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
-				}
-				else if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+12 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+12){
-					setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
-				}
-				else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+12 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+12){
-					setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
-			
-				} else {
-					setCursor(Cursor.getDefaultCursor());
-				}
-			} else {
-				setCursor(Cursor.getDefaultCursor());
-			}
+                    if (focus != null) {
+                        if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6) {
+                            setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
+                        } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6){
+                            setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
+                        } else if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                            setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
+                        } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                            setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
+                        } else if(evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6){
+                            setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
+                        } else if(evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                            setCursor(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
+                        } else if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6){
+                            setCursor(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
+                        } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6){
+                            setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
+                        } else {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    } else {
+                        setCursor(Cursor.getDefaultCursor());
+                    }
 
                     mousePosX = evt.getX();
                     mousePosY = evt.getY();
