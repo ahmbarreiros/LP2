@@ -9,6 +9,9 @@ public class Line extends Figure {
         super(x, y, w, h, contornoRGBIndex);
     }
 
+    public void changeFillU() {}
+    public void changeFillD() {}
+
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(this.colors.get(contornoRGBIndex));

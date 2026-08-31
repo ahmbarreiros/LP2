@@ -246,6 +246,9 @@ class ListFrame extends JFrame {
     public void paint (Graphics g) {
         super.paint(g);
 
+        for (Figure fig: this.figs) {
+            fig.paint(g);
+        }
         if (focus != null) {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setColor(new Color(255,0,0));
@@ -253,8 +256,6 @@ class ListFrame extends JFrame {
             g2d.setColor(new Color(0,0,0));
 	    }
 
-        for (Figure fig: this.figs) {
-            fig.paint(g);
-        }
+
     }
 }
