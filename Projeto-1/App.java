@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Arc2D.Double;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import figures.*;
 
@@ -23,6 +24,7 @@ class ListFrame extends JFrame {
     private int mousePosYPressed = 0;
     private int mousePosX = 0;
     private int mousePosY = 0;
+
 
     ListFrame () {
         this.addWindowListener (
@@ -187,23 +189,51 @@ class ListFrame extends JFrame {
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
                     if (evt.getKeyChar() == 'r') {
-                        figs.add(new Rect(mousePosX-25, mousePosY-25, 50, 50));
+                        figs.add(new Rect(mousePosX-25, mousePosY-25, 50, 50, 0));
                         repaint();  // outer.repaint()
                     }
                     if (evt.getKeyChar() == 'e') {
-                        figs.add(new Ellipse(mousePosX-40, mousePosY-25, 80, 50));
+                        figs.add(new Ellipse(mousePosX-40, mousePosY-25, 80, 50, 0));
                         repaint();  // outer.repaint()
                     }
                     if (evt.getKeyChar() == 'a') {
-                        figs.add(new Arc(mousePosX-25, mousePosY-25, 50, 50));
+                        figs.add(new Arc(mousePosX-25, mousePosY-25, 50, 50, 0));
+                        repaint();  // outer.repaint()
+                    }
+                    if (evt.getKeyChar() == 'l') {
+                        figs.add(new Line(mousePosX-25, mousePosY-25, 50, 50, 0));
                         repaint();  // outer.repaint()
                     }
                     if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
                         if (focus != null) {
-				figs.remove(focus);
-				focus = null;
+                            figs.remove(focus);
+                            focus = null;
                         	repaint();
-			}
+                        }
+                    }
+                    if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
+                        if (focus != null) {
+                            focus.changeBorderR();
+                            repaint();
+                        }
+                    }
+                    if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+                        if (focus != null) {
+                            focus.changeBorderL();
+                            repaint();
+                        }
+                    }
+                    if (evt.getKeyCode() == KeyEvent.VK_UP) {
+                        if (focus != null) {
+                            focus.changeFillU();
+                            repaint();
+                        }
+                    }
+                    if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+                        if (focus != null) {
+                            focus.changeFillD();
+                            repaint();
+                        }
                     }
                 }
             }

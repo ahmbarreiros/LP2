@@ -1,16 +1,24 @@
 package figures;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Figure {
     public int x, y;
     public int w, h;
+    public int contornoRGBIndex;
+    public Color contornoRGB = Color.BLACK;
+    public static ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.ORANGE, Color.PINK, Color.WHITE));
 
-    public Figure (int x, int y, int w, int h) {
+
+    public Figure (int x, int y, int w, int h, int contornoRGBIndex) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
+        this.contornoRGBIndex = contornoRGBIndex;
     }
 
     public void drag (int dx, int dy) {
@@ -100,6 +108,19 @@ public abstract class Figure {
             this.w += (dw);
         }
     }
+
+    public void changeBorderR() {
+        this.contornoRGBIndex = (contornoRGBIndex+1) % colors.size();
+    }
+    public void changeBorderL() {
+        if(contornoRGBIndex>0) {
+             this.contornoRGBIndex = (contornoRGBIndex-1) % colors.size();
+        }else{
+                this.contornoRGBIndex = colors.size()-1;
+        }
+    }
+    public abstract void changeFillD();
+    public abstract void changeFillU();
 
     public abstract void paint (Graphics g);
 }

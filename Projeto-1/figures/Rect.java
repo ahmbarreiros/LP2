@@ -3,8 +3,10 @@ package figures;
 import java.awt.*;
 
 public class Rect extends Figure {
-    public Rect (int x, int y, int w, int h) {
-        super(x,y, w,h);
+
+    private int fillRGBIndex = -1;
+    public Rect (int x, int y, int w, int h, int contornoRGBIndex) {
+        super(x,y, w,h, contornoRGBIndex);
     }
 
     public void print () {
@@ -12,8 +14,25 @@ public class Rect extends Figure {
             this.w, this.h, this.x, this.y);
     }
 
+    public void changeFillD() {
+        if(fillRGBIndex == -1) {fillRGBIndex = 0;}
+        else { this.fillRGBIndex = (fillRGBIndex+1) % colors.size();
+}
+           }
+    public void changeFillU() {
+        if(this.fillRGBIndex>0) {
+            this.fillRGBIndex = (this.fillRGBIndex-1) % colors.size();
+        }else{
+            this.fillRGBIndex = colors.size()-1;
+        }
+    }
+
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(this.colors.get(contornoRGBIndex));
         g2d.drawRect(this.x,this.y, this.w,this.h);
+        g2d.setColor(this.colors.get(fillRGBIndex));
+        g2d.fillRect(this.x+1, this.y+1, this.w-1, this.h-1);
+        g2d.setColor(Color.BLACK);
     }
 }
