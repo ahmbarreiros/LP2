@@ -188,20 +188,28 @@ class ListFrame extends JFrame {
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
-                    if (evt.getKeyChar() == 'r') {
-                        figs.add(new Rect(mousePosX-25, mousePosY-25, 50, 50, 0));
+                    if (evt.getKeyChar() == 'r' || evt.getKeyChar() == 'R') {
+                        Rect rect = new Rect(mousePosX-25, mousePosY-25, 50, 50, 0);
+                        figs.add(rect);
+                        focus = rect;
                         repaint();  // outer.repaint()
                     }
-                    if (evt.getKeyChar() == 'e') {
-                        figs.add(new Ellipse(mousePosX-40, mousePosY-25, 80, 50, 0));
+                    if (evt.getKeyChar() == 'e' || evt.getKeyChar() == 'E') {
+                        Ellipse ellipse = new Ellipse(mousePosX-40, mousePosY-25, 80, 50, 0);
+                        figs.add(ellipse);
+                        focus = ellipse;
                         repaint();  // outer.repaint()
                     }
-                    if (evt.getKeyChar() == 'a') {
-                        figs.add(new Arc(mousePosX-25, mousePosY-25, 50, 50, 0));
+                    if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A') {
+                        Arc arc = new Arc(mousePosX-25, mousePosY-25, 50, 50, 0);
+                        figs.add(arc);
+                        focus = arc;
                         repaint();  // outer.repaint()
                     }
-                    if (evt.getKeyChar() == 'l') {
-                        figs.add(new Line(mousePosX-25, mousePosY-25, 50, 50, 0));
+                    if (evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L') {
+                        Line line = new Line(mousePosX-25, mousePosY-25, 50, 50, 0);
+                        figs.add(line);
+                        focus = line;
                         repaint();  // outer.repaint()
                     }
                     if (evt.getKeyCode() == KeyEvent.VK_DELETE) {

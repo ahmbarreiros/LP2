@@ -12,10 +12,10 @@
 #### Apenas Retângulos, Elipses e Arcos possuem cor de fundo alterável.
 #### Para alterar o tamanho de uma figura, deixe ela em foco e arraste uma das bordas em qualquer uma das 8 possíveis direções.
 ### Teclas de criação de figuras
-- "E" - Cria Elipse
-- "R" - Cria Retângulo
-- "A" - Cria Arco
-- "L" - Cria Linha
+- "E" - Cria Elipse e a deixa em foco
+- "R" - Cria Retângulo e a deixa em foco
+- "A" - Cria Arco e a deixa em foco
+- "L" - Cria Linha e a deixa em foco
 - "DELETE" - Deleta a figura que está em foco
 - "SETA P/ DIREITA" - Avança na lista de cores de contorno de uma figura em foco.
 - "SETA P/ ESQUERDA" - Recua na lista de cores de contorno de uma figura em foco.
