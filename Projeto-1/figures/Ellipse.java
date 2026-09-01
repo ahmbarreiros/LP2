@@ -33,6 +33,7 @@ public class Ellipse extends Figure {
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(this.colors.get(contornoRGBIndex));
+	g2d.rotate(Math.toRadians(this.rot), this.x + (this.w / 2), this.y + (this.h / 2));
         g2d.draw(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
         if(this.paintBG) {
             g2d.setColor(this.colors.get(this.fillRGBIndex));

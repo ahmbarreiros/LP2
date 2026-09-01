@@ -1,6 +1,7 @@
 package figures;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public class Rect extends Figure {
     private int fillRGBIndex = 0;
@@ -30,12 +31,17 @@ public class Rect extends Figure {
 
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+	AffineTransform ot = g2d.getTransform();
         g2d.setColor(this.colors.get(contornoRGBIndex));
+	g2d.setStroke(new BasicStroke(this.border));
+	g2d.rotate(Math.toRadians(this.rot), this.x + (this.w  / 2), this.y + (this.h / 2));
         g2d.drawRect(this.x,this.y, this.w,this.h);
         if(this.paintBG) {
             g2d.setColor(this.colors.get(fillRGBIndex));
             g2d.fillRect(this.x+1, this.y+1, this.w-1, this.h-1);
         }
+	g2d.setStroke(new BasicStroke(1.0f));
+	g2d.setTransform(ot);
         g2d.setColor(Color.BLACK);
     }
 }
