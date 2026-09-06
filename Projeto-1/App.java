@@ -42,33 +42,25 @@ class ListFrame extends JFrame {
                                       mousePosXPressed = evt.getX();
                                       mousePosYPressed = evt.getY();
                                       drag = "";
-                                      if(focus != null && ((focus.x-12 <= evt.getX() && (focus.x + focus.w + 12) >= evt.getX()) && (focus.y-12 <= evt.getY() && (focus.y + focus.h + 12) >= evt.getY()))) {
-                                          if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6) {
+                                      if(focus != null && ((focus.x-(int)focus.border <= evt.getX() && (focus.x + focus.w + (int)focus.border) >= evt.getX()) && (focus.y-(int)focus.border <= evt.getY() && (focus.y + focus.h + (int)focus.border) >= evt.getY()))) {
+                                          if(evt.getX() >= focus.x-6-(int)focus.border && evt.getX() <= focus.x+6+(int)focus.border && evt.getY() >= focus.y-6-(int)focus.border && evt.getY() <= focus.y+6+(int)focus.border) {
                                               drag = "NW";
-                                          } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6){
+                                          } else if(evt.getX() >= (focus.x+focus.w)-6-(int)focus.border && evt.getX() <= (focus.x+focus.w)+6+(int)focus.border && evt.getX() <= (focus.x+focus.w+(int)(focus.border))+6 && evt.getY() >= focus.y-6-(int)focus.border && evt.getY() <= focus.y+6+(int)focus.border){
                                               drag = "NE";
-                                          } else if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                                          } else if(evt.getX() >= focus.x-6-(int)focus.border && evt.getX() <= focus.x+6+(int)focus.border && evt.getY() >= (focus.y+focus.h)-6-(int)focus.border && evt.getY() <= (focus.y+focus.h)+6+(int)focus.border){
                                               drag = "SW";
-                                          } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                                          } else if(evt.getX() >= (focus.x+focus.w)-6-(int)focus.border && evt.getX() <= (focus.x+focus.w)+6+(int)focus.border && evt.getY() >= (focus.y+focus.h)-6-(int)focus.border && evt.getY() <= (focus.y+focus.h)+6+(int)focus.border){
                                               drag = "SE";
-                                          } else if(evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6){
+                                          } else if(evt.getY() >= focus.y-6-(int)focus.border && evt.getY() <= focus.y+6+(int)focus.border){
                                               drag = "N";
-                                          } else if(evt.getY() >= (focus.y+focus.h-6) && evt.getY() <= (focus.y+focus.h+6)){
+                                          } else if(evt.getY() >= (focus.y+focus.h-6)-(int)focus.border && evt.getY() <= (focus.y+focus.h+6)+(int)focus.border){
                                               drag = "S";
-                                          } else if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6){
+                                          } else if(evt.getX() >= focus.x-6-(int)focus.border && evt.getX() <= focus.x+6+(int)focus.border){
                                               drag = "W";
-                                          } else if(evt.getX() >= (focus.x+focus.w-6) && evt.getX() <= (focus.x+focus.w+6)){
+                                          } else if(evt.getX() >= (focus.x+focus.w-6)-(int)focus.border && evt.getX() <= (focus.x+focus.w+6)+(int)focus.border){
                                               drag = "E";
                                           } else if(evt.getX() >= focus.x+7 && evt.getX() <= (focus.x + focus.w - 7) && evt.getY() >= focus.y+7 && evt.getY() <= (focus.y + focus.h - 7)){
                                               drag = "D";
-                                          } else if(evt.getX() >= focus.x-12 && evt.getX() <= focus.x-6 && evt.getY() >= focus.y+6 && evt.getY() <= focus.y+12) {
-                                              drag = "RNW";
-                                          } else if(evt.getX() >= (focus.x+focus.w)+6 && evt.getX() <= (focus.x+focus.w)+12 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6){
-                                              drag = "RNE";
-                                          } else if(evt.getX() >= focus.x-12 && evt.getX() <= focus.x-6 && evt.getY() >= (focus.y+focus.h)+6 && evt.getY() <= (focus.y+focus.h)+12){
-                                              drag = "RSW";
-                                          } else if(evt.getX() >= (focus.x+focus.w)+6 && evt.getX() <= (focus.x+focus.w)+12 && evt.getY() >= (focus.y+focus.h)+6 && evt.getY() <= (focus.y+focus.h)+12){
-                                              drag = "RSE";
                                           }
                                           return;
                                       }
@@ -107,9 +99,9 @@ class ListFrame extends JFrame {
                                           case "E":
                                               setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
                                               break;
-					  case "D":
-					      setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-					      break;
+                                          case "D":
+                                              setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+                                              break;
                                           default:
                                               setCursor(Cursor.getDefaultCursor());
                                               break;
@@ -118,7 +110,7 @@ class ListFrame extends JFrame {
                                       }
                                   }
                               }
-                              );
+                             );
 
         this.addMouseMotionListener(new MouseMotionAdapter() {
                 public void mouseDragged(MouseEvent evt) {
@@ -166,25 +158,25 @@ class ListFrame extends JFrame {
 
                 public void mouseMoved(MouseEvent evt) {
                     if (focus != null) {
-                        if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6) {
+                        if(evt.getX() >= focus.x-6-(int)focus.border && evt.getX() <= focus.x+6+(int)focus.border && evt.getY() >= focus.y-6-(int)focus.border && evt.getY() <= focus.y+6+(int)focus.border) {
                             setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
-                        } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6){
+                        } else if(evt.getX() >= (focus.x+focus.w)-6-(int)focus.border && evt.getX() <= (focus.x+focus.w)+6+(int)focus.border && evt.getY() >= focus.y-6-(int)focus.border && evt.getY() <= focus.y+6+(int)focus.border){
                             setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
-                        } else if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                        } else if(evt.getX() >= focus.x-6-(int)focus.border && evt.getX() <= focus.x+6+(int)focus.border && evt.getY() >= (focus.y+focus.h)-6-(int)focus.border && evt.getY() <= (focus.y+focus.h)+6+(int)focus.border){
                             setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
-                        } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6 && evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                        } else if(evt.getX() >= (focus.x+focus.w)-6-(int)focus.border && evt.getX() <= (focus.x+focus.w)+6+(int)focus.border && evt.getY() >= (focus.y+focus.h)-6-(int)focus.border && evt.getY() <= (focus.y+focus.h)+6+(int)focus.border){
                             setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
-                        } else if(evt.getY() >= focus.y-6 && evt.getY() <= focus.y+6){
+                        } else if(evt.getY() >= focus.y-6-(int)focus.border && evt.getY() <= focus.y+6+(int)focus.border){
                             setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
-                        } else if(evt.getY() >= (focus.y+focus.h)-6 && evt.getY() <= (focus.y+focus.h)+6){
+                        } else if(evt.getY() >= (focus.y+focus.h-6)-(int)focus.border && evt.getY() <= (focus.y+focus.h+6)+(int)focus.border){
                             setCursor(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
-                        } else if(evt.getX() >= focus.x-6 && evt.getX() <= focus.x+6){
+                        } else if(evt.getX() >= focus.x-6-(int)focus.border && evt.getX() <= focus.x+6+(int)focus.border){
                             setCursor(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
-                        } else if(evt.getX() >= (focus.x+focus.w)-6 && evt.getX() <= (focus.x+focus.w)+6){
+                        } else if(evt.getX() >= (focus.x+focus.w-6)-(int)focus.border && evt.getX() <= (focus.x+focus.w+6)+(int)focus.border){
                             setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
                         } else if(evt.getX() >= focus.x+7 && evt.getX() <= (focus.x + focus.w - 7) && evt.getY() >= focus.y+7 && evt.getY() <= (focus.y + focus.h - 7)) {
-			    setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-			} else {
+                            setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+                        } else {
                             setCursor(Cursor.getDefaultCursor());
                         }
                     } else {
@@ -257,35 +249,17 @@ class ListFrame extends JFrame {
                             repaint();
                         }
                     }
-		    if (evt.getKeyChar() == 'z' || evt.getKeyChar() == 'Z') {
-			if (focus != null) {
-			    focus.rot -= 1;
-			    repaint();
-			}
-                    }
-		    if (evt.getKeyChar() == 'x' || evt.getKeyChar() == 'X') {
-			if (focus != null) {
-			    focus.rot += 1;
-			    repaint();
-			}
-                    }
-		    if (evt.getKeyChar() == 'c' || evt.getKeyChar() == 'C') {
-			if (focus != null) {
-			    focus.rot = 0;
-			    repaint();
-			}
+                    if (evt.getKeyChar() == '=' || evt.getKeyChar() == '+') {
+                        if (focus != null) {
+                            focus.border += 1.0f;
+                            repaint();
+                        }
                     }	
-		    if (evt.getKeyChar() == '=' || evt.getKeyChar() == '+') {
-			if (focus != null) {
-			    focus.border += 1.0f;
-			    repaint();
-			}
-                    }	
-		    if (evt.getKeyChar() == '-') {
-			if (focus != null && focus.border > 1.0f) {
-			    focus.border -= 1.0f;
-			    repaint();
-			}
+                    if (evt.getKeyChar() == '-') {
+                        if (focus != null && focus.border > 1.0f) {
+                            focus.border -= 1.0f;
+                            repaint();
+                        }
                     }
                 }
             }
@@ -298,20 +272,13 @@ class ListFrame extends JFrame {
     public void paint (Graphics g) {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(
-			RenderingHints.KEY_ANTIALIASING,
-			RenderingHints.VALUE_ANTIALIAS_ON
-			);
-        AffineTransform ot = g2d.getTransform();
 
         for (Figure fig: this.figs) {
             fig.paint(g);
         }
         if (focus != null) {
             g2d.setColor(new Color(255,0,0));
-	    g2d.rotate(Math.toRadians(focus.rot), focus.x + (focus.w/2), focus.y + (focus.h/2));
-            g2d.drawRect(focus.x-3-(int)focus.border, focus.y-3-(int)focus.border, focus.w+6+(int)focus.border, focus.h+6+(int)focus.border);
-	    g2d.setTransform(ot);
+            g2d.drawRect(focus.x-3-(int)focus.border, focus.y-3-(int)focus.border, focus.w+6+(int)(focus.border*2), focus.h+6+(int)(focus.border*2));
             g2d.setColor(new Color(0,0,0));
 	    }
 

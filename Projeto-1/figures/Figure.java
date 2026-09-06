@@ -11,7 +11,6 @@ public abstract class Figure {
     public float border = 1.0f;
     public int contornoRGBIndex;
     public Color contornoRGB = Color.BLACK;
-    public int rot = 0;
     public static ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.ORANGE, Color.PINK, Color.WHITE));
 
 
