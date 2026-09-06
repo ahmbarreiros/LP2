@@ -250,14 +250,14 @@ class ListFrame extends JFrame {
                         }
                     }
                     if (evt.getKeyChar() == '=' || evt.getKeyChar() == '+') {
-                        if (focus != null) {
-                            focus.border += 1.0f;
+                        if (focus != null && focus.border <= 20.0f) {
+                            focus.border += 2.0f;
                             repaint();
                         }
                     }	
                     if (evt.getKeyChar() == '-') {
-                        if (focus != null && focus.border > 1.0f) {
-                            focus.border -= 1.0f;
+                        if (focus != null && focus.border > 2.0f) {
+                            focus.border -= 2.0f;
                             repaint();
                         }
                     }

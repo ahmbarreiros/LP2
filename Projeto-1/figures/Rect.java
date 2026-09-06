@@ -36,9 +36,9 @@ public class Rect extends Figure {
         g2d.drawRect(this.x,this.y, this.w,this.h);
         if(this.paintBG) {
             g2d.setColor(this.colors.get(fillRGBIndex));
-            g2d.fillRect(this.x+1, this.y+1, this.w-1, this.h-1);
+            g2d.fillRect(this.x+(int)(Math.ceil(this.border/2)), this.y+(int)(Math.ceil(this.border/2)), this.w-(int)this.border, this.h-(int)this.border);
         }
-        g2d.setStroke(new BasicStroke(1.0f));
+        g2d.setStroke(new BasicStroke(2.0f));
         g2d.setColor(Color.BLACK);
     }
 }
