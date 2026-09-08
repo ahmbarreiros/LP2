@@ -21,3 +21,5 @@
 - "SETA P/ ESQUERDA" - Recua na lista de cores de contorno de uma figura em foco.
 - "SETA P/ BAIXO" - Avança na lista de cores de fundo de uma figura em foco se disponível.
 - "SETA P/ CIMA" - Recua na lista de cores de fundo de uma figura em foco se disponível.
+- "-" - Diminui tamanho do contorno
+- "+" - Aumenta tamanho do contorno
