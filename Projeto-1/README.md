@@ -6,6 +6,7 @@
 - Z-Order definida
 - Alterar cor de contorno
 - Alterar cor de fundo
+- Alterar tamanho do contorno de figuras
 
 ## Como Usar (COMANDOS)
 #### Para deixar uma figura em foco, clique nela.
