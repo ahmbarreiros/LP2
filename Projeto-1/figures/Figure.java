@@ -8,19 +8,27 @@ import java.util.Arrays;
 public abstract class Figure {
     public int x, y;
     public int w, h;
-    public float border = 2.0f;
+    public float border;
     public int contornoRGBIndex;
+    public String drag;
     public Color contornoRGB = Color.BLACK;
     public static ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.ORANGE, Color.PINK, Color.WHITE));
+                                      
 
 
-    public Figure (int x, int y, int w, int h, int contornoRGBIndex) {
+    public abstract void oper(int mouseX, int mouseY);
+
+    public Figure (int x, int y, int w, int h, int contornoRGBIndex, float border, String drag) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.contornoRGBIndex = contornoRGBIndex;
+        this.border = border;
+        this.drag = drag;
     }
+
+    
 
     public void drag (int dx, int dy) {
         this.x += dx;
@@ -123,5 +131,10 @@ public abstract class Figure {
     public abstract void changeFillD();
     public abstract void changeFillU();
 
+    public abstract void changeBorderU();
+    public abstract void changeBorderD();
+
     public abstract void paint (Graphics g);
+    public abstract void paintFocus (Graphics g, int incW, int incH);
+
 }
