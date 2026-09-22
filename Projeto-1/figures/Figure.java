@@ -66,6 +66,8 @@ public abstract class Figure implements IVisible {
 
     public void transform(String section, int dw, int dh) {
         switch(section) {
+            case "D":
+                break;
             case "NW":
                 this.transformNW(dw, dh);
             case "NE":

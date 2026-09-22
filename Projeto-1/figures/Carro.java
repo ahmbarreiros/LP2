@@ -106,48 +106,10 @@ public class Carro extends Figure {
         this.roda2.changeBorderD();
     }
 
-    // Guarda a operação que está sendo realizada na figura
-    public void oper(int mouseX, int mouseY) {
-        this.drag = "";
-        if((mouseX >= this.x-6-(int)this.border 
-            && mouseX <= (this.x+this.w+6)+(int)this.border 
-            && mouseY >= this.y-6-(int)this.border 
-            && mouseY <= (this.y+this.h+6)+(int)this.border)) {
-                                          if(mouseX >= this.x-6-(int)this.border 
-                                            && mouseX <= this.x+6+(int)this.border 
-                                            && mouseY >= this.y-6-(int)this.border 
-                                            && mouseY <= this.y+6+(int)this.border) {
-                                              this.drag = "NW";
-                                          } else if(mouseX >= (this.x+this.w)-6-(int)this.border && mouseX <= (this.x+this.w)+6+(int)this.border && mouseX <= (this.x+this.w+(int)(this.border))+6 && mouseY >= this.y-6-(int)this.border && mouseY <= this.y+6+(int)this.border){
-                                              this.drag = "NE";
-                                          } else if(mouseX >= this.x-6-(int)this.border && mouseX <= this.x+6+(int)this.border && mouseY >= (this.y+this.h)-6-(int)this.border && mouseY <= (this.y+this.h)+6+(int)this.border){
-                                              this.drag = "SW";
-                                          } else if(mouseX >= (this.x+this.w)-6-(int)this.border && mouseX <= (this.x+this.w)+6+(int)this.border && mouseY >= (this.y+this.h)-6-(int)this.border && mouseY <= (this.y+this.h)+6+(int)this.border){
-                                              this.drag = "SE";
-                                          } else if(mouseX >= this.x-6-(int)this.border && mouseX <= (this.x+this.w+6)+(int)this.border && mouseY >= this.y-6-(int)this.border && mouseY <= this.y+6+(int)this.border){
-                                              this.drag = "N";
-                                          } else if(mouseX >= this.x-6-(int)this.border && mouseX <= (this.x+this.w+6)+(int)this.border && mouseY >= (this.y+this.h-6)-(int)this.border && mouseY <= (this.y+this.h+6)+(int)this.border){
-                                              this.drag = "S";
-                                          } else if(mouseX >= this.x-6-(int)this.border && mouseX <= this.x+6+(int)this.border && mouseY >= this.y-6-(int)this.border && mouseY <= (this.y+this.h+6)+(int)this.border) {
-                                              this.drag = "W";
-                                          } else if(mouseX >= (this.x+this.w-6)-(int)this.border && mouseX <= (this.x+this.w+6)+(int)this.border && mouseY >= this.y-6-(int)this.border && mouseY <= (this.y+this.h+6)+(int)this.border) {
-                                              this.drag = "E";
-                                          } else if(mouseX >= this.x+7 && mouseX <= (this.x + this.w - 7) && mouseY >= this.y+7 && mouseY <= (this.y + this.h - 7)){
-                                              this.drag = "D";
-                                          }
-        } else this.drag = "";
-    }
-
-   
-    // Pinta o contorno do foco, comportando o chassi e as rodas
-    public void paintFocus(Graphics g, int incW, int incH) {
-        this.chassi.paintFocus(g, this.roda1.w/2, this.roda1.h/2);
-    }
-
     // Pinta o carro, incluindo chassi e rodas
-	public void paint(Graphics g) {
-		this.chassi.paint(g);
-		this.roda1.paint(g);
-		this.roda2.paint(g);
+	public void paint(Graphics g, boolean focused) {
+		this.chassi.paint(g, focused);
+		this.roda1.paint(g, focused);
+		this.roda2.paint(g, focused);
 	}
 }

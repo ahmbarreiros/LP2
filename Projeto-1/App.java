@@ -97,7 +97,6 @@ class ListFrame extends JFrame {
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
-
                     // Cria uma figura "Retângulo", na posição central do mouse, com borda padrão 2 e marcador de ação vazio
                     if (evt.getKeyChar() == 'r' || evt.getKeyChar() == 'R') {
                         Rect rect = new Rect(mousePosX-25, mousePosY-25, 50, 50, 0, 2.0f, "");
