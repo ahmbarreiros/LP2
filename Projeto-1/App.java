@@ -19,7 +19,7 @@ class App {
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     private Figure focus = null;
-    private String drag = "";
+    private String mousePressedSection = "";
 
     private int mousePosXPressed = 0;
     private int mousePosYPressed = 0;
@@ -41,56 +41,22 @@ class ListFrame extends JFrame {
                                   public void mousePressed(MouseEvent evt) {
                                       mousePosXPressed = evt.getX();
                                       mousePosYPressed = evt.getY();
-                                      
-                                      
-                                      // Ao pressionar o mouse, itera sobre a lista de figuras e avalia as operações disponíveis sobre ela caso o mouse esteja sobre a figura
                                       focus = null;
                                       for (Figure fig: figs) {
-                                          fig.oper(evt.getX(), evt.getY());
-                                          if (fig.drag != "") {
-                                              focus = fig;
+                                          if(fig.clicked(evt.getX(), evt.getY())) {
+                                            focus = fig;
+                                            mousePressedSection = fig.mouseSection(evt.getX(), evt.getY());
                                           }
                                       }
                                       repaint();
                                   }
                                   public void mouseReleased(MouseEvent evt) {
                                       // Reavalia o marcador de ação de uma figura em foco ao parar de pressionar o botão do mouse
+                                      mousePressedSection = "";
                                       if (focus != null) {
-                                          focus.oper(evt.getX(), evt.getY());
-                                          switch(focus.drag) {
-                                          case "NW":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
-                                              break;
-                                          case "NE":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
-                                              break;
-                                          case "SW":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
-                                              break;
-                                          case "SE":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
-                                              break;
-                                          case "N":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
-                                              break;
-                                          case "S":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
-                                              break;
-                                          case "W":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
-                                              break;
-                                          case "E":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
-                                              break;
-                                          case "D":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-                                              break;
-                                          default:
-                                              setCursor(Cursor.getDefaultCursor());
-                                              break;
-                                          }
-                                          repaint();
+                                          setCursor(Cursor.getPredefinedCursor(focus.getCursor(focus.mouseSection(evt.getX(), evt.getY()))));
                                       }
+                                      repaint();
                                   }
                               }
                              );
@@ -100,37 +66,11 @@ class ListFrame extends JFrame {
                     // Ao arrastar o mouse, avalia o marcador de ação de uma figura em foco e realiza uma operação caso haja uma ação em curso.
                     mousePosX = evt.getX();
                     mousePosY = evt.getY();
-                    if (focus != null) {
-                        switch(focus.drag) {
-                        case "NW":
-                            focus.transformNW(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                            break;
-                        case "NE":
-                            focus.transformNE(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                            break;
-                        case "SW":
-                            focus.transformSW(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                            break;
-                        case "SE":
-                            focus.transformSE(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                            break;
-                        case "N":
-                            focus.transformN(mousePosY - mousePosYPressed);
-                            break;
-                        case "S":
-                            focus.transformS(mousePosY - mousePosYPressed);
-                            break;
-                        case "W":
-                            focus.transformW(mousePosX - mousePosXPressed);
-                            break;
-                        case "E":
-                            focus.transformE(mousePosX - mousePosXPressed);
-                            break;
-                        case "D":
+                    if(focus != null && mousePressedSection != "") {
+                        if(mousePressedSection == "D") {
                             focus.drag(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                            break;
-                        default:
-                            break;
+                        } else {
+                            focus.transform(mousePressedSection, mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
                         }
                     }
                     mousePosXPressed = mousePosX;
@@ -143,44 +83,11 @@ class ListFrame extends JFrame {
                 public void mouseMoved(MouseEvent evt) {
                     // Avalia o marcador de ação de uma figura em foco e altera o cursor caso a ação coincida com a posição do mouse
                     if (focus != null) {
-                                          focus.oper(evt.getX(), evt.getY());
-                                          switch(focus.drag) {
-                                          case "NW":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
-                                              break;
-                                          case "NE":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
-                                              break;
-                                          case "SW":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
-                                              break;
-                                          case "SE":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
-                                              break;
-                                          case "N":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
-                                              break;
-                                          case "S":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
-                                              break;
-                                          case "W":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
-                                              break;
-                                          case "E":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
-                                              break;
-                                          case "D":
-                                              setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-                                              break;
-                                          default:
-                                              setCursor(Cursor.getDefaultCursor());
-                                              break;
-                                          }
-                                      } else setCursor(Cursor.getDefaultCursor());
+                        setCursor(Cursor.getPredefinedCursor(focus.getCursor(focus.mouseSection(evt.getX(), evt.getY()))));
+                    }
                 mousePosX = evt.getX();
                 mousePosY = evt.getY();
                 repaint();
-
                 } 
                 
             }
@@ -314,15 +221,7 @@ class ListFrame extends JFrame {
 
         // Para cara figura da lista, pinta ela com o seu próprio método
         for (Figure fig: this.figs) {
-            fig.paint(g);
+            fig.paint(g, focus==fig);
         }
-
-        // Caso haja uma figura em foco, pinta o retângulo que a destaca, de acordo com o tipo de figura
-        if (focus != null) {
-            focus.paintFocus(g, 3, 3);
-        }
-        
-
-
     }
 }
