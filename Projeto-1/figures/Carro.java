@@ -12,11 +12,11 @@ public class Carro extends Figure {
 
 
     // Construtor da classe carro com posição X e Y, tamanho W e H, cor do contorno inicial, largura do contorno inicial e marcador de "ação" (mover, transformar, etc.)
-	public Carro(int x, int y, int w, int h, int contornoRGBIndex, float border, String drag) {
-		super(x, y, w, h, contornoRGBIndex, border, drag);
-		this.chassi = new Rect(this.x, this.y, this.w, this.h, this.contornoRGBIndex, this.border, "");
-		this.roda1 = new Ellipse(this.x, (this.y+this.h-15), this.w/4, 30, this.contornoRGBIndex, this.border, "");
-		this.roda2 = new Ellipse((this.x+(this.w)-(this.w/4)), (this.y+this.h-15), this.w/4, 30, this.contornoRGBIndex, this.border, "");
+	public Carro(int x, int y, int w, int h) {
+		super(x, y, w, h);
+		this.chassi = new Rect(this.x, this.y, this.w, this.h);
+		this.roda1 = new Ellipse(this.x, this.y+this.h-15, 30, 30);
+		this.roda2 = new Ellipse(this.x+(this.w)-30, this.y+this.h-15, 30, 30);
 	}
 
     // Métodos para alterar cor de fundo
@@ -37,6 +37,12 @@ public class Carro extends Figure {
         this.chassi.drag(dx, dy);
         this.roda1.drag(dx, dy);
         this.roda2.drag(dx, dy);
+    }
+
+    public int getCursor(String section) {
+        return this.chassi.getCursor(section);
+        //this.roda1.getCursor(section);
+        //this.roda2.getCursor(section);
     }
 
     // Métodos de transformação da figura
@@ -104,6 +110,18 @@ public class Carro extends Figure {
         this.chassi.changeBorderD();
         this.roda1.changeBorderD();
         this.roda2.changeBorderD();
+    }
+
+    public String mouseSection(int mouseX, int mouseY) {
+        return this.chassi.mouseSection(mouseX, mouseY);
+        //this.roda1.mouseSection(mouseX, mouseY);
+        //this.roda2.mouseSection(mouseX, mouseY);
+    }
+
+    public boolean clicked(int x, int y) {
+        return this.chassi.clicked(x, y);
+        //this.roda1.clicked(x, y);
+        //this.roda2.clicked(x, y);
     }
 
     // Pinta o carro, incluindo chassi e rodas

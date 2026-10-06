@@ -8,8 +8,8 @@ public class Arc extends Figure{
     private int start = 0, extent = 180, type = 0, fillRGBIndex = 0;
     private boolean paintBG = false;
 
-	public Arc(int x, int y, int w, int h, int contornoRGBIndex, float border, String drag) {
-		super(x, y, w, h, contornoRGBIndex, border, drag);
+	public Arc(int x, int y, int w, int h) {
+		super(x, y, w, h);
 	}
 
     public void changeFillD() {

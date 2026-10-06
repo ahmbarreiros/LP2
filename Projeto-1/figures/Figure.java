@@ -11,9 +11,9 @@ public abstract class Figure implements IVisible {
     public int x, y;
     public int w, h;
 
-    public float border; // Variável de largura de contorno
+    public float border = 2.0f; // Variável de largura de contorno
 
-    public int contornoRGBIndex; // Variável de cor de contorno
+    public int contornoRGBIndex = 0; // Variável de cor de contorno
 
     public String drag; // Variável de ação da figura
 
@@ -21,14 +21,11 @@ public abstract class Figure implements IVisible {
 
     public String mousePressedSection = ""; // Variável que guarda a ação que está sendo realizada na figura, caso se aplique
 
-    public Figure (int x, int y, int w, int h, int contornoRGBIndex, float border, String drag) {
+    public Figure (int x, int y, int w, int h) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.contornoRGBIndex = contornoRGBIndex;
-        this.border = border;
-        this.drag = drag;
     }
 
     

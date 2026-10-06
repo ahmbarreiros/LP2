@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class Line extends Figure {
 
-    public Line(int x, int y, int w, int h, int contornoRGBIndex, float border, String drag) {
-        super(x, y, w, h, contornoRGBIndex, border, drag);
+    public Line(int x, int y, int w, int h) {
+        super(x, y, w, h);
     }
 
     public void changeFillU() {}

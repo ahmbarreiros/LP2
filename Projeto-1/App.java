@@ -120,7 +120,7 @@ class ListFrame extends JFrame {
 
                         // Cria uma figura "Retângulo", na posição central do mouse, com borda padrão 2 e marcador de ação vazio.
                         case (KeyEvent.VK_R):
-                            Rect rect = new Rect(mousePosX-25, mousePosY-25, 50, 50, 0, 2.0f, "");
+                            Rect rect = new Rect(mousePosX-25, mousePosY-25, 50, 50);
                             figs.add(rect);
                             focus = rect;
                             repaint();  // outer.repaint()
@@ -128,7 +128,7 @@ class ListFrame extends JFrame {
 
                         // Cria uma figura "Ellipse", na posição central do mouse, com borda padrão 2 e marcador de ação vazio.
                         case (KeyEvent.VK_E):
-                            Ellipse ellipse = new Ellipse(mousePosX-40, mousePosY-25, 80, 50, 0, 2.0f, "");
+                            Ellipse ellipse = new Ellipse(mousePosX-40, mousePosY-25, 80, 50);
                             figs.add(ellipse);
                             focus = ellipse;
                             repaint();  // outer.repaint()
@@ -136,7 +136,7 @@ class ListFrame extends JFrame {
 
                         // Cria uma figura "Arco", na posição central do mouse, com borda padrão 2 e marcador de ação vazio.
                         case (KeyEvent.VK_A):
-                            Arc arc = new Arc(mousePosX-25, mousePosY-25, 50, 50, 0, 2.0f, "");
+                            Arc arc = new Arc(mousePosX-25, mousePosY-25, 50, 50);
                             figs.add(arc);
                             focus = arc;
                             repaint();  // outer.repaint()
@@ -144,7 +144,7 @@ class ListFrame extends JFrame {
 
                         // Cria uma figura "Reta", na posição central do mouse, com borda padrão 2 e marcador de ação vazio.
                         case (KeyEvent.VK_L):
-                            Line line = new Line(mousePosX-25, mousePosY-25, 50, 50, 0, 2.0f, "");
+                            Line line = new Line(mousePosX-25, mousePosY-25, 50, 50);
                             figs.add(line);
                             focus = line;
                             repaint();  // outer.repaint()
@@ -152,7 +152,7 @@ class ListFrame extends JFrame {
 
                         // Cria uma figura "Carro", na posição central do mouse, com borda padrão 2 e marcador de ação vazio.
                         case (KeyEvent.VK_1):
-                            Carro carro = new Carro(mousePosX-25, mousePosY-25, 50, 50, 0, 2.0f, "");
+                            Carro carro = new Carro(mousePosX-25, mousePosY-25, 50, 50);
                             // Adiciona o carro da lista de figuras e deixa o carro em foco
                             figs.add(carro);
                             focus = carro;
@@ -161,10 +161,15 @@ class ListFrame extends JFrame {
 
                         // Deleta a figura em foco.
                         case (KeyEvent.VK_DELETE):
-                            if (focus != null) {
+                            if (focus != null && figs.size() > 1) {
+                                int i = figs.indexOf(focus);
+                                figs.remove(focus);
+                                focus = focus = figs.get((i+1) % figs.size());
+                            	repaint();
+                            } else if (focus != null) {
                                 figs.remove(focus);
                                 focus = null;
-                            	repaint();
+                                repaint();
                             }
                             break;
 
