@@ -6,9 +6,9 @@ import java.awt.geom.Ellipse2D.Double;
 public class Carro extends Figure {
 	
     // Cria as partes do carro
-	Rect chassi;
+	private Rect chassi;
 
-	Ellipse roda1, roda2;
+	private Ellipse roda1, roda2;
 
 
     // Construtor da classe carro com posição X e Y, tamanho W e H, cor do contorno inicial, largura do contorno inicial e marcador de "ação" (mover, transformar, etc.)

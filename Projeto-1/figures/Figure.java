@@ -8,16 +8,16 @@ import java.util.Arrays;
 import ivisible.IVisible;
 
 public abstract class Figure implements IVisible {
-    public int x, y;
-    public int w, h;
+    protected int x, y;
+    protected int w, h;
 
-    public float border = 2.0f; // Variável de largura de contorno
+    protected float border = 2.0f; // Variável de largura de contorno
 
-    public int contornoRGBIndex = 0; // Variável de cor de contorno
+    protected int contornoRGBIndex = 0; // Variável de cor de contorno
 
-    public String drag; // Variável de ação da figura
+    protected String drag; // Variável de ação da figura
 
-    public static ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.ORANGE, Color.PINK, Color.WHITE)); // Lista de cores disponíveis para uma figura
+    protected static ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.ORANGE, Color.PINK, Color.WHITE)); // Lista de cores disponíveis para uma figura
 
     public String mousePressedSection = ""; // Variável que guarda a ação que está sendo realizada na figura, caso se aplique
 
