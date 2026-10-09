@@ -18,7 +18,9 @@ class App {
 
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
+    ArrayList<Button> buts = new ArrayList<Button>();
     private Figure focus = null;
+    private Button focus_but = null;
 
     private int mousePosXPressed = 0;
     private int mousePosYPressed = 0;
@@ -27,6 +29,13 @@ class ListFrame extends JFrame {
 
 
     ListFrame () {
+        buts.add(new Button(1, new Rect(0, 0, 0, 0)));
+        buts.add(new Button(2, new Ellipse(0, 0, 0, 0)));
+        buts.add(new Button(3, new Arc(0, 0, 0, 0)));
+        buts.add(new Button(4, new Line(0, 0, 0, 0)));
+        buts.add(new Button(5, new Carro(0, 0, 0, 0)));
+
+
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
@@ -41,6 +50,7 @@ class ListFrame extends JFrame {
                                       mousePosXPressed = evt.getX();
                                       mousePosYPressed = evt.getY();
                                       focus = null;
+                                      focus_but = null;
 
                                       // Itera pela lista de figuras ao pressionar o mouse, verificando se alguma delas deve ser focada.
                                       for (Figure fig: figs) {
@@ -52,6 +62,13 @@ class ListFrame extends JFrame {
                                             focus.mousePressedSection = focus.mouseSection(evt.getX(), evt.getY());
                                           }
                                       }
+
+                                      for (Button but: buts) {
+                                          if(but.clicked(evt.getX(), evt.getY())) {
+                                              focus_but = but;
+                                          }
+                                      }
+
                                       repaint();
                                   }
                                   public void mouseReleased(MouseEvent evt) {
@@ -251,5 +268,10 @@ class ListFrame extends JFrame {
         for (Figure fig: this.figs) {
             fig.paint(g, focus==fig);
         }
+
+        for (Button but: this.buts) {
+            but.paint(g, focus_but==but);
+        }
+
     }
 }

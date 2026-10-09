@@ -8,8 +8,8 @@ import java.util.Arrays;
 import ivisible.IVisible;
 
 public abstract class Figure implements IVisible {
-    protected int x, y;
-    protected int w, h;
+    public int x, y;
+    public int w, h;
 
     protected float border = 2.0f; // Variável de largura de contorno
 
