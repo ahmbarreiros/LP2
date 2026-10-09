@@ -6,8 +6,9 @@ import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import ivisible.IVisible;
+import java.io.Serializable;
 
-public abstract class Figure implements IVisible {
+public abstract class Figure implements IVisible, Serializable {
     public int x, y;
     public int w, h;
 
@@ -274,26 +275,6 @@ public abstract class Figure implements IVisible {
         if (this.border > 2.0f) {
             this.border -= 2.0f;
         }
-    }
-
-
-    public boolean clicked(int x, int y) {
-    /**
-         * Método para determinar se a figura foi clicada.
-         *
-         * Verifica se o mouse, na posição x, y,  foi pressionado dentro dos limites x, x+w, y, y+h da figura, incluindo seu tamanho de borda e uma "folga"
-         * para impresições do usuário ao clicar.
-         *
-         * int x: posição x do mouse.
-         * int y: posição y do mouse.
-         * return Boolean: Retorna "true" caso a posição do mouse esteja dentro dos limites da figura, e "false" caso contrário.
-         */
-        if((x >= this.x-6-(int)this.border 
-            && x <= (this.x+this.w+6)+(int)this.border 
-            && y >= this.y-6-(int)this.border 
-            && y <= (this.y+this.h+6)+(int)this.border)) {
-            return true;
-        } else return false;
     }
 
     public String mouseSection(int mouseX, int mouseY) {

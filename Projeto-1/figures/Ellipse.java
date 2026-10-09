@@ -273,7 +273,6 @@ public class Ellipse extends Figure {
         }
     }
 
-
     public boolean clicked(int x, int y) {
     /**
          * Método para determinar se a figura foi clicada.
@@ -285,12 +284,10 @@ public class Ellipse extends Figure {
          * int y: posição y do mouse.
          * return Boolean: Retorna "true" caso a posição do mouse esteja dentro dos limites da figura, e "false" caso contrário.
          */
-        if((x >= this.x-6-(int)this.border
-            && x <= (this.x+this.w+6)+(int)this.border
-            && y >= this.y-6-(int)this.border
-            && y <= (this.y+this.h+6)+(int)this.border)) {
-            return true;
-        } else return false;
+        return ((x >= this.x-(int)this.border
+                 && x <= (this.x+this.w)+(int)this.border
+                 && y >= this.y-(int)this.border
+                 && y <= (this.y+this.h)+(int)this.border));
     }
 
     public String mouseSection(int mouseX, int mouseY) {

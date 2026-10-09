@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import figures.*;
+import java.io.*;
+import org.jfree.svg.SVGGenerator;
 
 class App {
     public static void main (String[] args) {
@@ -29,6 +31,16 @@ class ListFrame extends JFrame {
 
 
     ListFrame () {
+
+        try {
+            FileInputStream f = new FileInputStream("proj.bin");
+            ObjectInputStream o = new ObjectInputStream(f);
+            this.figs = (ArrayList<Figure>) o.readObject();
+            o.close();
+        } catch (Exception x) {
+            System.out.println("ERRO!");
+        }
+
         buts.add(new Button(1, new Rect(0, 0, 0, 0)));
         buts.add(new Button(2, new Ellipse(0, 0, 0, 0)));
         buts.add(new Button(3, new Arc(0, 0, 0, 0)));
@@ -39,6 +51,15 @@ class ListFrame extends JFrame {
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
+                    try {
+                        FileOutputStream f = new FileOutputStream("proj.bin");
+                        ObjectOutputStream o = new ObjectOutputStream(f);
+                        o.writeObject(figs);
+                        o.flush();
+                        o.close();
+                    } catch (Exception x) {
+                        System.out.println("ERRO EM GRAVAÇÃO");
+                    }
                     System.exit(0);
                 }
             }
