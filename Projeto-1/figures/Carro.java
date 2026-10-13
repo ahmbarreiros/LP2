@@ -15,8 +15,8 @@ public class Carro extends Figure {
 	public Carro(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		this.chassi = new Rect(this.x, this.y, this.w, this.h);
-		this.roda1 = new Ellipse(this.x, this.y+this.h-15, 30, 30);
-		this.roda2 = new Ellipse(this.x+(this.w)-30, this.y+this.h-15, 30, 30);
+		this.roda1 = new Ellipse(this.x, this.y+this.h/2, this.w/2, this.h/2);
+		this.roda2 = new Ellipse(this.x, this.y+this.h/2, this.w/2, this.h/2);
 	}
 
     // Métodos para alterar cor de fundo
@@ -41,57 +41,67 @@ public class Carro extends Figure {
 
     public int getCursor(String section) {
         return this.chassi.getCursor(section);
-        //this.roda1.getCursor(section);
-        //this.roda2.getCursor(section);
     }
 
     // Métodos de transformação da figura
     public void transformNW(int dw, int dh) {
         this.chassi.transformNW(dw, dh);
-        this.roda1.transformNW(dw, dh);
-        this.roda2.transformNW(dw, dh);
+       	this.roda1.x = this.chassi.x;
+       	this.roda1.y = this.chassi.y+this.chassi.h;
+       	this.roda2.x = this.chassi.x+this.chassi.w-(this.roda2.w);
+       	this.roda2.y = this.chassi.y+this.chassi.h;
     }
     public void transformNE(int dw, int dh) {
         this.chassi.transformNE(dw, dh);
-        this.roda1.transformNE(dw, dh);
-        this.roda2.transformNE(dw, dh);
+       	this.roda1.x = this.chassi.x;
+       	this.roda1.y = this.chassi.y+this.chassi.h;
+       	this.roda2.x = this.chassi.x+this.chassi.w-(this.roda2.w);
+       	this.roda2.y = this.chassi.y+this.chassi.h;
     }
     public void transformSW(int dw, int dh) {
         this.chassi.transformSW(dw, dh);
-        this.roda1.transformSW(dw, dh);
-        this.roda2.transformSW(dw, dh);
+       	this.roda1.x = this.chassi.x;
+       	this.roda1.y = this.chassi.y+this.chassi.h;
+       	this.roda2.x = this.chassi.x+this.chassi.w-(this.roda2.w);
+       	this.roda2.y = this.chassi.y+this.chassi.h;
     }
     public void transformSE(int dw, int dh) {
         this.chassi.transformSE(dw, dh);
-        this.roda1.transformSE(dw, dh);
-        this.roda2.transformSE(dw, dh);
+       	this.roda1.x = this.chassi.x;
+       	this.roda1.y = this.chassi.y+this.chassi.h;
+       	this.roda2.x = this.chassi.x+this.chassi.w-(this.roda2.w);
+       	this.roda2.y = this.chassi.y+this.chassi.h;
     }
     public void transformN(int dh) {
         this.chassi.transformN(dh);
-        this.roda1.transformN(dh);
-        this.roda2.transformN(dh);
+       	this.roda1.x = this.chassi.x;
+       	this.roda1.y = this.chassi.y+this.chassi.h;
+       	this.roda2.x = this.chassi.x+this.chassi.w-(this.roda2.w);
+       	this.roda2.y = this.chassi.y+this.chassi.h;
     }
     public void transformS(int dh) {
         this.chassi.transformS(dh);
-        this.roda1.transformS(dh);
-        this.roda2.transformS(dh);
+       	this.roda1.x = this.chassi.x;
+       	this.roda1.y = this.chassi.y+this.chassi.h;
+       	this.roda2.x = this.chassi.x+this.chassi.w-(this.roda2.w);
+       	this.roda2.y = this.chassi.y+this.chassi.h;
     }
     public void transformW(int dw) {
         this.chassi.transformW(dw);
-        this.roda1.transformW(dw);
-        this.roda2.transformW(dw);
+       	this.roda1.x = this.chassi.x;
+       	this.roda2.x = this.chassi.x+this.chassi.w-(this.roda2.w);
     }
     public void transformE(int dw) {
         this.chassi.transformE(dw);
-        this.roda1.transformE(dw);
-        this.roda2.transformE(dw);
+       	this.roda1.x = this.chassi.x;
+       	this.roda2.x = this.chassi.x+this.chassi.w-(this.roda2.w);
     }
 
     // Métodos para alterar cor de contorno
     public void changeBorderR() {
         this.chassi.changeBorderR();
-        this.roda1.changeBorderR();
-        this.roda2.changeBorderR();
+       	this.roda1.x = this.chassi.x;
+       	this.roda2.x = this.chassi.x+this.chassi.w-(this.roda2.w);
     }
     public void changeBorderL() {
         this.chassi.changeBorderL();
@@ -114,14 +124,10 @@ public class Carro extends Figure {
 
     public String mouseSection(int mouseX, int mouseY) {
         return this.chassi.mouseSection(mouseX, mouseY);
-        //this.roda1.mouseSection(mouseX, mouseY);
-        //this.roda2.mouseSection(mouseX, mouseY);
     }
 
     public boolean clicked(int x, int y) {
         return this.chassi.clicked(x, y);
-        //this.roda1.clicked(x, y);
-        //this.roda2.clicked(x, y);
     }
 
     // Pinta o carro, incluindo chassi e rodas

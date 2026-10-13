@@ -29,11 +29,11 @@ class ListFrame extends JFrame {
 
 
     ListFrame () {
-        buts.add(new Button(1, new Rect(0, 0, 0, 0)));
-        buts.add(new Button(2, new Ellipse(0, 0, 0, 0)));
-        buts.add(new Button(3, new Arc(0, 0, 0, 0)));
-        buts.add(new Button(4, new Line(0, 0, 0, 0)));
-        buts.add(new Button(5, new Carro(0, 0, 0, 0)));
+        buts.add(new Button(1, new Rect(0, 0, 0, 0), "Rect"));
+        buts.add(new Button(2, new Ellipse(0, 0, 0, 0), "Ellipse"));
+        buts.add(new Button(3, new Arc(0, 0, 0, 0), "Arc"));
+        buts.add(new Button(4, new Line(0, 0, 0, 0), "Line"));
+        buts.add(new Button(5, new Carro(0, 0, 0, 0), "Carro"));
 
 
         this.addWindowListener (
@@ -49,27 +49,65 @@ class ListFrame extends JFrame {
                                   public void mousePressed(MouseEvent evt) {
                                       mousePosXPressed = evt.getX();
                                       mousePosYPressed = evt.getY();
-                                      focus = null;
-                                      focus_but = null;
+                                      
+                                      if(focus_but != null) {
+                                      	switch(focus_but.type) {
+                                      	    case "Rect":
+                                      	        Rect rect = new Rect(mousePosX-25, mousePosY-25, 50, 50);
+                                                figs.add(rect);
+                                                focus = rect;
+                                                repaint();  // outer.repaint()
+                                                break;
+                                            case "Ellipse":
+                                                Ellipse ellipse = new Ellipse(mousePosX-40, mousePosY-25, 80, 50);
+                                                figs.add(ellipse);
+                                                focus = ellipse;
+                                                repaint();  // outer.repaint()
+                                                break;
+                                            case "Arc":
+                                                Arc arc = new Arc(mousePosX-25, mousePosY-25, 50, 50);
+                                                figs.add(arc);
+                                                focus = arc;
+                                                repaint();  // outer.repaint()
+                                                break;
+                                            case "Line":
+                                                Line line = new Line(mousePosX-25, mousePosY-25, 50, 50);
+                                                figs.add(line);
+                                                focus = line;
+                                                repaint();  // outer.repaint()
+                                                break;
+                                            case "Carro":
+                                                Carro carro = new Carro(mousePosX-25, mousePosY-25, 50, 50);
+                                                // Adiciona o carro da lista de figuras e deixa o carro em foco
+                                                figs.add(carro);
+                                                focus = carro;
+                                                repaint();  // outer.repaint()
+                                                break;
+                                      	}
+                                      	focus_but = null;
+                                      } else {
+                                      	  focus = null;
+				                          focus_but = null;
 
-                                      // Itera pela lista de figuras ao pressionar o mouse, verificando se alguma delas deve ser focada.
-                                      for (Figure fig: figs) {
-                                          if(fig.clicked(evt.getX(), evt.getY())) {
-                                            fig.mousePressedSection = "";
-                                            focus = fig;
 
-                                            // Verifica a posição do mouse ao clicar na figura, para realizar alguma ação de transformar ou arrastar caso se aplique.
-                                            focus.mousePressedSection = focus.mouseSection(evt.getX(), evt.getY());
-                                          }
+				                          // Itera pela lista de figuras ao pressionar o mouse, verificando se alguma delas deve ser focada.
+				                          for (Figure fig: figs) {
+				                              if(fig.clicked(evt.getX(), evt.getY())) {
+				                                fig.mousePressedSection = "";
+				                                focus = fig;
+
+				                                // Verifica a posição do mouse ao clicar na figura, para realizar alguma ação de transformar ou arrastar caso se aplique.
+				                                focus.mousePressedSection = focus.mouseSection(evt.getX(), evt.getY());
+				                              }
+				                          }
+
+				                          for (Button but: buts) {
+				                              if(but.clicked(evt.getX(), evt.getY())) {
+				                                  focus_but = but;
+				                              }
+				                          }
+				                          repaint();
                                       }
-
-                                      for (Button but: buts) {
-                                          if(but.clicked(evt.getX(), evt.getY())) {
-                                              focus_but = but;
-                                          }
-                                      }
-
-                                      repaint();
                                   }
                                   public void mouseReleased(MouseEvent evt) {
                                       // Reavalia o marcador de ação de uma figura em foco ao parar de pressionar o botão do mouse.
