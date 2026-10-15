@@ -287,10 +287,14 @@ public class Rect extends Figure {
          * int y: posição y do mouse.
          * return Boolean: Retorna "true" caso a posição do mouse esteja dentro dos limites da figura, e "false" caso contrário.
          */
+<<<<<<< HEAD
         return ((x >= this.x-(int)this.border
                  && x <= (this.x+this.w)+(int)this.border
                  && y >= this.y-(int)this.border
                  && y <= (this.y+this.h)+(int)this.border));
+=======
+        return (x >= this.x-(int)this.border && x <=  this.x+this.w+(int)(this.border*2)) && (y >= (this.y-(int)this.border) && y <= this.y+this.h+(int)(this.border*2));
+>>>>>>> refs/remotes/origin/main
     }
 
     public String mouseSection(int mouseX, int mouseY) {

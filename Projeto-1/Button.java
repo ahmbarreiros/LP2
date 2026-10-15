@@ -9,14 +9,16 @@ public class Button implements IVisible {
 
     public  int    idx;
     private Figure fig;
+    public String type;
 
-    public Button (int idx, Figure fig) {
+    public Button (int idx, Figure fig, String type) {
         this.idx = idx;
         this.fig = fig;
         this.fig.x = PAD+SPC;
         this.fig.y = PAD+SPC + idx*DIM;
         this.fig.w = DIM-PAD*2;
         this.fig.h = DIM-PAD*2;
+        this.type = type;
     }
 
     public boolean clicked (int x, int y) {
