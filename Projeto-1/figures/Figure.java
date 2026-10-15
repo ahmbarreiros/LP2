@@ -343,7 +343,10 @@ public abstract class Figure implements IVisible, Serializable {
       } else return "NA";
     }
 
+    public String colorToHex(Color c) {
+        return String.format("#%02x%02x%02x", c.getRed(), c.getGreen(), c.getBlue());
+    }
     // Método abstrato de paint e para pintar contorno de foco na figura
     public abstract void paint (Graphics g, boolean focused);
-
+    public abstract String toSVG();
 }

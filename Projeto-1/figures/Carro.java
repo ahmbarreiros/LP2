@@ -212,4 +212,8 @@ public class Carro extends Figure {
         }
         g2d.setColor(Color.BLACK);
 	}
+
+    public String toSVG() {
+        return this.chassi.toSVG() + this.roda1.toSVG() + this.roda2.toSVG();
+    }
 }

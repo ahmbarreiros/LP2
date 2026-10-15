@@ -70,4 +70,10 @@ public class Arc extends Figure{
         }
         g2d.setColor(Color.BLACK);
 	}
+
+    public String toSVG() {
+        System.out.printf("%s %s\n", this.colorToHex(this.getArrayList().get(this.fillRGBIndex)), this.colorToHex(this.getArrayList().get(this.contornoRGBIndex)));
+        return String.format("<path d=\"M %d %d A %d %d 0 0 0 %d %d\" stroke=\"%s\" fill=\"%s\" stroke-width=\"%d\" />", (this.x+(this.w/2))+this.w/2, this.y+(this.h/2), this.w/2, this.h/2, (this.x+(this.w/2))-(this.w/2), this.y+(this.h/2), this.colorToHex(this.getArrayList().get(this.contornoRGBIndex)), paintBG ? this.colorToHex(this.getArrayList().get(this.fillRGBIndex)) : "transparent", (int)this.border);
+    }
+
 }

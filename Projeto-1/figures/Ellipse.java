@@ -371,4 +371,8 @@ public class Ellipse extends Figure {
         g2d.setColor(Color.BLACK);
 
     }
+
+    public String toSVG() {
+        return String.format("<ellipse cx=\"%d\" cy=\"%d\" rx=\"%d\" ry=\"%d\" stroke=\"%s\" fill=\"%s\" stroke-width=\"%d\" />", this.x+(this.w/2), this.y+(this.h/2), this.w/2, this.h/2, this.colorToHex(this.getArrayList().get(this.contornoRGBIndex)), paintBG ? this.colorToHex(this.getArrayList().get(this.fillRGBIndex)) : "transparent", (int)this.border);
+    }
 }

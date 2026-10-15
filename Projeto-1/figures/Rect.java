@@ -373,4 +373,9 @@ public class Rect extends Figure {
         
         g2d.setColor(Color.BLACK);
     }
+
+    public String toSVG() {
+        return String.format("<rect x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\" stroke=\"%s\" fill=\"%s\" stroke-width=\"%d\" />", this.x, this.y, this.w, this.h, this.colorToHex(this.getArrayList().get(this.contornoRGBIndex)), paintBG ? this.colorToHex(this.getArrayList().get(this.fillRGBIndex)) : "transparent", (int)this.border);
+    }
+
 }

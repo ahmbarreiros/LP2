@@ -38,6 +38,7 @@ class ListFrame extends JFrame {
         } catch (Exception x) {
             System.out.println("ERRO!");
         }
+
         buts.add(new Button(1, new Rect(0, 0, 0, 0), "Rect"));
         buts.add(new Button(2, new Ellipse(0, 0, 0, 0), "Ellipse"));
         buts.add(new Button(3, new Arc(0, 0, 0, 0), "Arc"));
@@ -56,6 +57,21 @@ class ListFrame extends JFrame {
                         o.close();
                     } catch (Exception x) {
                         System.out.println("ERRO EM GRAVAÇÃO");
+                    }
+
+                    try {
+                        String svg_string = "<svg width=\"1280px\" height=\"720px\" xmlns=\"http://www.w3.org/2000/svg\">\n";
+                        for(Figure fig : figs) {
+                            svg_string += fig.toSVG() + "\n";
+                        }
+                        svg_string += "</svg>\n";
+                        FileOutputStream fsvg = new FileOutputStream("proj.svg");
+                        FileWriter fwsvg = new FileWriter("proj.svg");
+                        fwsvg.write(svg_string);
+                        fwsvg.flush();
+                        fwsvg.close();
+                    } catch (Exception x) {
+                        System.out.println("Erro em gravação SVG");
                     }
                     System.exit(0);
                 }

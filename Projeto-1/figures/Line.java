@@ -52,4 +52,8 @@ public class Line extends Figure {
         }
         g2d.setColor(Color.BLACK);
     }
+
+    public String toSVG() {
+        return String.format("<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" stroke=\"%s\" stroke-width=\"%d\" />", this.x, this.y, this.x+this.w, this.y+this.h, this.colorToHex(this.getArrayList().get(this.contornoRGBIndex)), (int)this.border);
+    }
 }
