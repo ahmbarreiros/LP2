@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Random;
 import figures.*;
 import java.io.*;
-import org.jfree.svg.SVGGenerator;
 
 class App {
     public static void main (String[] args) {
@@ -31,8 +30,6 @@ class ListFrame extends JFrame {
 
 
     ListFrame () {
-<<<<<<< HEAD
-
         try {
             FileInputStream f = new FileInputStream("proj.bin");
             ObjectInputStream o = new ObjectInputStream(f);
@@ -41,19 +38,11 @@ class ListFrame extends JFrame {
         } catch (Exception x) {
             System.out.println("ERRO!");
         }
-
-        buts.add(new Button(1, new Rect(0, 0, 0, 0)));
-        buts.add(new Button(2, new Ellipse(0, 0, 0, 0)));
-        buts.add(new Button(3, new Arc(0, 0, 0, 0)));
-        buts.add(new Button(4, new Line(0, 0, 0, 0)));
-        buts.add(new Button(5, new Carro(0, 0, 0, 0)));
-=======
         buts.add(new Button(1, new Rect(0, 0, 0, 0), "Rect"));
         buts.add(new Button(2, new Ellipse(0, 0, 0, 0), "Ellipse"));
         buts.add(new Button(3, new Arc(0, 0, 0, 0), "Arc"));
         buts.add(new Button(4, new Line(0, 0, 0, 0), "Line"));
         buts.add(new Button(5, new Carro(0, 0, 0, 0), "Carro"));
->>>>>>> refs/remotes/origin/main
 
 
         this.addWindowListener (
