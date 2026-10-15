@@ -42,7 +42,7 @@ public class Line extends Figure {
 
     public void paint(Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(this.colors.get(contornoRGBIndex));
+        g2d.setColor(this.getArrayList().get(contornoRGBIndex));
         g2d.setStroke(new BasicStroke(this.border));
         g2d.drawLine(x, y, x+w, y+h);
         g2d.setStroke(new BasicStroke(2.0f));

@@ -22,14 +22,14 @@ public class Rect extends Figure {
     
     public void changeFillD() {
         this.paintBG = true;
-        this.fillRGBIndex = (fillRGBIndex+1) % colors.size();
+        this.fillRGBIndex = (fillRGBIndex+1) % this.getArrayList().size();
     }
     public void changeFillU() {
         this.paintBG = true;
         if(this.fillRGBIndex>0) {
-            this.fillRGBIndex = (this.fillRGBIndex-1) % colors.size();
+            this.fillRGBIndex = (this.fillRGBIndex-1) % this.getArrayList().size();
         }else{
-            this.fillRGBIndex = colors.size()-1;
+            this.fillRGBIndex = this.getArrayList().size()-1;
         }
     }
     public void drag (int dx, int dy) {
@@ -231,7 +231,7 @@ public class Rect extends Figure {
          * na última posição da lista de cores, assim voltando para a posição 0 (inicio) da lista.
          *
          */
-        this.contornoRGBIndex = (contornoRGBIndex+1) % colors.size();
+        this.contornoRGBIndex = (contornoRGBIndex+1) % this.getArrayList().size();
     }
 
     public void changeBorderL() {
@@ -244,9 +244,9 @@ public class Rect extends Figure {
          *
          */
         if(contornoRGBIndex>0) {
-             this.contornoRGBIndex = (contornoRGBIndex-1) % colors.size();
+             this.contornoRGBIndex = (contornoRGBIndex-1) % this.getArrayList().size();
         }else{
-                this.contornoRGBIndex = colors.size()-1;
+                this.contornoRGBIndex = this.getArrayList().size()-1;
         }
     }
 
@@ -356,12 +356,12 @@ public class Rect extends Figure {
 
     public void paint (Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(this.colors.get(contornoRGBIndex)); // Insere cor de contorno
+        g2d.setColor(this.getArrayList().get(contornoRGBIndex)); // Insere cor de contorno
         g2d.setStroke(new BasicStroke(this.border)); // Insere largura do contorno
         g2d.drawRect(this.x,this.y, this.w,this.h);
         // Se o fundo não for transparente, preenche o mesmo
         if(this.paintBG) {
-            g2d.setColor(this.colors.get(fillRGBIndex));
+            g2d.setColor(this.getArrayList().get(fillRGBIndex));
             g2d.fillRect(this.x+(int)(Math.ceil(this.border/2)), this.y+(int)(Math.ceil(this.border/2)), this.w-(int)this.border, this.h-(int)this.border);
         }
         g2d.setStroke(new BasicStroke(2.0f));

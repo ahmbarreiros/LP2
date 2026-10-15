@@ -14,14 +14,14 @@ public class Arc extends Figure{
 
     public void changeFillD() {
         this.paintBG = true;
-        this.fillRGBIndex = (fillRGBIndex+1) % colors.size();
+        this.fillRGBIndex = (fillRGBIndex+1) % this.getArrayList().size();
     }
     public void changeFillU() {
         this.paintBG = true;
         if(this.fillRGBIndex>0) {
-            this.fillRGBIndex = (this.fillRGBIndex-1) % colors.size();
+            this.fillRGBIndex = (this.fillRGBIndex-1) % this.getArrayList().size();
         }else{
-            this.fillRGBIndex = colors.size()-1;
+            this.fillRGBIndex = this.getArrayList().size()-1;
         }
     }
 
@@ -57,10 +57,10 @@ public class Arc extends Figure{
 	public void paint(Graphics g, boolean focused) {
 		Graphics2D g2d = (Graphics2D) g;
         if(this.paintBG) {
-            g2d.setColor(this.colors.get(fillRGBIndex));
+            g2d.setColor(this.getArrayList().get(fillRGBIndex));
             g2d.fillArc(this.x+(int)(Math.ceil(this.border/2)), this.y+(int)(Math.ceil(this.border/2)), this.w-(int)this.border, this.h, this.start, this.extent);
         }
-        g2d.setColor(this.colors.get(contornoRGBIndex));
+        g2d.setColor(this.getArrayList().get(contornoRGBIndex));
         g2d.setStroke(new BasicStroke(this.border));
 		g2d.draw(new Arc2D.Double(this.x, this.y, this.w, this.h, this.start, this.extent, this.type));
         g2d.setStroke(new BasicStroke(2.0f));

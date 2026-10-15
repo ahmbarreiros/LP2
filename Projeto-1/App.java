@@ -111,11 +111,11 @@ class ListFrame extends JFrame {
 				                          // Itera pela lista de figuras ao pressionar o mouse, verificando se alguma delas deve ser focada.
 				                          for (Figure fig: figs) {
 				                              if(fig.clicked(evt.getX(), evt.getY())) {
-				                                fig.mousePressedSection = "";
+				                                fig.setMousePressedSection("");
 				                                focus = fig;
 
 				                                // Verifica a posição do mouse ao clicar na figura, para realizar alguma ação de transformar ou arrastar caso se aplique.
-				                                focus.mousePressedSection = focus.mouseSection(evt.getX(), evt.getY());
+				                                focus.setMousePressedSection(focus.mouseSection(evt.getX(), evt.getY()));
 				                              }
 				                          }
 
@@ -130,7 +130,7 @@ class ListFrame extends JFrame {
                                   public void mouseReleased(MouseEvent evt) {
                                       // Reavalia o marcador de ação de uma figura em foco ao parar de pressionar o botão do mouse.
                                       if (focus != null) {
-                                          focus.mousePressedSection = "";
+                                          focus.setMousePressedSection("");
                                           setCursor(Cursor.getPredefinedCursor(focus.getCursor(focus.mouseSection(evt.getX(), evt.getY()))));
                                       }
                                       repaint();
@@ -143,24 +143,24 @@ class ListFrame extends JFrame {
                     // Ao arrastar o mouse, avalia o marcador de ação de uma figura em foco e realiza uma operação caso haja uma ação em curso.
                     mousePosX = evt.getX();
                     mousePosY = evt.getY();
-                    if(focus != null && focus.mousePressedSection != "") {
-                        if(focus.mousePressedSection == "D") {
+                    if(focus != null && focus.getMousePressedSection() != "") {
+                        if(focus.getMousePressedSection() == "D") {
                             focus.drag(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                        } else if (focus.mousePressedSection == "NW"){
+                        } else if (focus.getMousePressedSection() == "NW"){
                             focus.transformNW(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                        } else if (focus.mousePressedSection == "NE"){
+                        } else if (focus.getMousePressedSection() == "NE"){
                             focus.transformNE(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                        } else if (focus.mousePressedSection == "SW"){
+                        } else if (focus.getMousePressedSection() == "SW"){
                             focus.transformSW(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                        } else if (focus.mousePressedSection == "SE"){
+                        } else if (focus.getMousePressedSection() == "SE"){
                             focus.transformSE(mousePosX - mousePosXPressed, mousePosY - mousePosYPressed);
-                        } else if (focus.mousePressedSection == "N"){
+                        } else if (focus.getMousePressedSection() == "N"){
                             focus.transformN(mousePosY - mousePosYPressed);
-                        } else if (focus.mousePressedSection == "W"){
+                        } else if (focus.getMousePressedSection() == "W"){
                             focus.transformW(mousePosX - mousePosXPressed);
-                        } else if (focus.mousePressedSection == "E"){
+                        } else if (focus.getMousePressedSection() == "E"){
                             focus.transformE(mousePosX - mousePosXPressed);
-                        } else if (focus.mousePressedSection == "S"){
+                        } else if (focus.getMousePressedSection() == "S"){
                             focus.transformS(mousePosY - mousePosYPressed);
                         }
                     }

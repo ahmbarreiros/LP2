@@ -18,9 +18,9 @@ public abstract class Figure implements IVisible, Serializable {
 
     protected String drag; // Variável de ação da figura
 
-    protected static ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.ORANGE, Color.PINK, Color.WHITE)); // Lista de cores disponíveis para uma figura
+    private static ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.ORANGE, Color.PINK, Color.WHITE)); // Lista de cores disponíveis para uma figura
 
-    public String mousePressedSection = ""; // Variável que guarda a ação que está sendo realizada na figura, caso se aplique
+    private String mousePressedSection = ""; // Variável que guarda a ação que está sendo realizada na figura, caso se aplique
 
     public Figure (int x, int y, int w, int h) {
         this.x = x;
@@ -29,7 +29,11 @@ public abstract class Figure implements IVisible, Serializable {
         this.h = h;
     }
 
-    
+    public ArrayList<Color> getArrayList(){ return this.colors; }
+    public String getMousePressedSection(){ return this.mousePressedSection; }
+
+    public void setMousePressedSection(String section){ this.mousePressedSection = section; }
+
     public void drag (int dx, int dy) {
     /**
          * Arrasta a figura sobre o canvas

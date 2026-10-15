@@ -19,14 +19,14 @@ public class Ellipse extends Figure {
 
     public void changeFillD() {
         this.paintBG = true;
-        this.fillRGBIndex = (fillRGBIndex+1) % colors.size();
+        this.fillRGBIndex = (fillRGBIndex+1) % this.getArrayList().size();
     }
     public void changeFillU() {
         this.paintBG = true;
         if(this.fillRGBIndex>0) {
-            this.fillRGBIndex = (this.fillRGBIndex-1) % colors.size();
+            this.fillRGBIndex = (this.fillRGBIndex-1) % this.getArrayList().size();
         }else{
-            this.fillRGBIndex = colors.size()-1;
+            this.fillRGBIndex = this.getArrayList().size()-1;
         }
     }
 
@@ -229,7 +229,7 @@ public class Ellipse extends Figure {
          * na última posição da lista de cores, assim voltando para a posição 0 (inicio) da lista.
          *
          */
-        this.contornoRGBIndex = (contornoRGBIndex+1) % colors.size();
+        this.contornoRGBIndex = (contornoRGBIndex+1) % this.getArrayList().size();
     }
 
     public void changeBorderL() {
@@ -242,9 +242,9 @@ public class Ellipse extends Figure {
          *
          */
         if(contornoRGBIndex>0) {
-             this.contornoRGBIndex = (contornoRGBIndex-1) % colors.size();
+             this.contornoRGBIndex = (contornoRGBIndex-1) % this.getArrayList().size();
         }else{
-                this.contornoRGBIndex = colors.size()-1;
+                this.contornoRGBIndex = this.getArrayList().size()-1;
         }
     }
 
@@ -356,11 +356,11 @@ public class Ellipse extends Figure {
 
     public void paint (Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(this.colors.get(contornoRGBIndex));
+        g2d.setColor(this.getArrayList().get(contornoRGBIndex));
         g2d.setStroke(new BasicStroke(this.border));
         g2d.draw(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
         if(this.paintBG) {
-            g2d.setColor(this.colors.get(this.fillRGBIndex));
+            g2d.setColor(this.getArrayList().get(this.fillRGBIndex));
             g2d.fillOval(this.x+(int)(Math.ceil(this.border/2)), this.y+(int)(Math.ceil(this.border/2)), this.w-(int)this.border, this.h-(int)this.border);
         }
         g2d.setStroke(new BasicStroke(2.0f));
