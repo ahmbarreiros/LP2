@@ -195,7 +195,7 @@ public class Carro extends Figure {
          * int y: posição y do mouse.
          * return Boolean: Retorna "true" caso a posição do mouse esteja dentro dos limites da figura, e "false" caso contrário.
          */
-        return (x >= this.x-(int)this.chassi.border && x <=  this.chassi.x+this.chassi.w+(int)(this.chassi.border*2)) && (y >= (this.chassi.y-(int)this.chassi.border) && y <= this.chassi.y+this.chassi.h+this.roda1.h+(int)(this.chassi.border*2));
+         return (this.chassi.clicked(x, y) || this.roda1.clicked(x, y) || this.roda2.clicked(x, y));
     }
 
     // Pinta o carro, incluindo chassi e rodas

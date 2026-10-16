@@ -1,6 +1,9 @@
 package figures;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Double;
+import java.awt.geom.Line2D;
 
 public class Line extends Figure {
 
@@ -27,24 +30,21 @@ public class Line extends Figure {
     /**
          * Método para determinar se a figura foi clicada.
          *
-         * Verifica se o mouse, na posição x, y,  foi pressionado dentro dos limites x, x+w, y, y+h da figura, incluindo seu tamanho de borda e uma "folga"
+         * Verifica se o mouse, na posição x, y,  foi pressionado dentro dos limites x, x+w, y, y+h da figura.
          * para impresições do usuário ao clicar.
          *
          * int x: posição x do mouse.
          * int y: posição y do mouse.
          * return Boolean: Retorna "true" caso a posição do mouse esteja dentro dos limites da figura, e "false" caso contrário.
          */
-        return ((x >= this.x-(int)this.border
-                 && x <= (this.x+this.w)+(int)this.border
-                 && y >= this.y-(int)this.border
-                 && y <= (this.y+this.h)+(int)this.border));
+         return (new Rectangle2D.Double(this.x, this.y, this.w, this.h)).contains(x, y);
     }
 
     public void paint(Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(this.getArrayList().get(contornoRGBIndex));
         g2d.setStroke(new BasicStroke(this.border));
-        g2d.drawLine(x, y, x+w, y+h);
+        g2d.draw(new Line2D.Double(this.x, this.y, this.x+this.w, this.y+this.h));
         g2d.setStroke(new BasicStroke(2.0f));
         if(focused) {
             g2d.setColor(new Color(255,0,0));

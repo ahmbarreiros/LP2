@@ -2,6 +2,8 @@ package figures;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Double;
 
 public class Rect extends Figure {
 
@@ -287,7 +289,7 @@ public class Rect extends Figure {
          * int y: posição y do mouse.
          * return Boolean: Retorna "true" caso a posição do mouse esteja dentro dos limites da figura, e "false" caso contrário.
          */
-        return (x >= this.x-(int)this.border && x <=  this.x+this.w+(int)(this.border*2)) && (y >= (this.y-(int)this.border) && y <= this.y+this.h+(int)(this.border*2));
+          return (new Rectangle2D.Double(this.x, this.y, this.w, this.h)).contains(x, y);
     }
 
     public String mouseSection(int mouseX, int mouseY) {

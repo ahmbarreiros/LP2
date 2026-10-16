@@ -120,20 +120,25 @@ class ListFrame extends JFrame {
                                       	}
                                       	focus_but = null;
                                       } else {
+                                          Figure atual = focus;
                                       	  focus = null;
 				                          focus_but = null;
 
+                                          if(atual != null && !(atual.mouseSection(evt.getX(), evt.getY()) == "NA")) {
+                                              focus = atual;
+                                              focus.setMousePressedSection(focus.mouseSection(evt.getX(), evt.getY()));
+                                          } else {
+                                              // Itera pela lista de figuras ao pressionar o mouse, verificando se alguma delas deve ser focada.
+                                              for (Figure fig: figs) {
+                                                  if(fig.clicked(evt.getX(), evt.getY())) {
+                                                      fig.setMousePressedSection("");
+                                                      focus = fig;
 
-				                          // Itera pela lista de figuras ao pressionar o mouse, verificando se alguma delas deve ser focada.
-				                          for (Figure fig: figs) {
-				                              if(fig.clicked(evt.getX(), evt.getY())) {
-				                                fig.setMousePressedSection("");
-				                                focus = fig;
-
-				                                // Verifica a posição do mouse ao clicar na figura, para realizar alguma ação de transformar ou arrastar caso se aplique.
-				                                focus.setMousePressedSection(focus.mouseSection(evt.getX(), evt.getY()));
-				                              }
-				                          }
+                                                      // Verifica a posição do mouse ao clicar na figura, para realizar alguma ação de transformar ou arrastar caso se aplique.
+                                                      focus.setMousePressedSection(focus.mouseSection(evt.getX(), evt.getY()));
+                                                  }
+                                              }
+                                          }
 
 				                          for (Button but: buts) {
 				                              if(but.clicked(evt.getX(), evt.getY())) {

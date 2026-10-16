@@ -48,10 +48,7 @@ public class Arc extends Figure{
          * int y: posição y do mouse.
          * return Boolean: Retorna "true" caso a posição do mouse esteja dentro dos limites da figura, e "false" caso contrário.
          */
-        return ((x >= this.x-(int)this.border
-                 && x <= (this.x+this.w)+(int)this.border
-                 && y >= this.y-(int)this.border
-                 && y <= (this.y+this.h)+(int)this.border));
+         return (new Arc2D.Double(this.x, this.y, this.w, this.h, this.start, this.extent, this.type)).contains(x, y);
     }
 
 	public void paint(Graphics g, boolean focused) {
@@ -72,7 +69,6 @@ public class Arc extends Figure{
 	}
 
     public String toSVG() {
-        System.out.printf("%s %s\n", this.colorToHex(this.getArrayList().get(this.fillRGBIndex)), this.colorToHex(this.getArrayList().get(this.contornoRGBIndex)));
         return String.format("<path d=\"M %d %d A %d %d 0 0 0 %d %d\" stroke=\"%s\" fill=\"%s\" stroke-width=\"%d\" />", (this.x+(this.w/2))+this.w/2, this.y+(this.h/2), this.w/2, this.h/2, (this.x+(this.w/2))-(this.w/2), this.y+(this.h/2), this.colorToHex(this.getArrayList().get(this.contornoRGBIndex)), paintBG ? this.colorToHex(this.getArrayList().get(this.fillRGBIndex)) : "transparent", (int)this.border);
     }
 
